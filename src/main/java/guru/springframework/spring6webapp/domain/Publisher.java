@@ -1,11 +1,9 @@
 package guru.springframework.spring6webapp.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Publisher {
@@ -18,6 +16,9 @@ public class Publisher {
     private String city;
     private String state;
     private String zipCode;
+
+    @OneToMany(mappedBy = "publisher")
+    private Set<Book> books;
 
     public Long getId() {
         return id;
@@ -65,6 +66,14 @@ public class Publisher {
 
     public void setZipCode(String zip) {
         this.zipCode = zip;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 
     @Override
